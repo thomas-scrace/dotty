@@ -5,7 +5,8 @@ import glob
 
 
 SYS_RC_PATH = "/etc/dottyrc"
-USER_RC_PATH = "~/.dottyrc"
+USER_RC_PATH = os.path.expanduser("~/.dottyrc")
+ROLE_CONF = "role.conf"
 
 OPTIONS = ["srcdir", "remote"]
 CONF_PATH = [SYS_RC_PATH, USER_RC_PATH] # Highest priority conf file last.
@@ -31,11 +32,14 @@ def get_env():
     return env
 
 
+ENV = get_env()
+
+
 def role_dir(role):
-    if not os.path.isdir(role_dir):
-        print "{} role does not exist.".format(role)
-        sys.exit(1)
-    return os.path.join(ENV["srcdir"], role)
+    d = os.path.join(os.path.expanduser(ENV["srcdir"]), role)
+    if not os.path.isdir(d):
+        sys.exit("Role '{}' does not exist.".format(role))
+    return d
 
 
 def role_conf(role):
@@ -63,7 +67,7 @@ def get_files(conf):
     files = {}
     for r in roles:
         pattern = os.path.join(role_dir(r), "*")
-        role_files = filter(glob.glob(pattern), "role.conf")
+        role_files = filter(lambda f: f != ROLE_CONF, glob.glob(pattern))
         base2abs = {os.path.basename(f): f for f in role_files}
         files = dict(base2abs.items() + files.items())
     return files
@@ -72,7 +76,8 @@ def get_files(conf):
 def get_ln_table(conf, files):
     ln_table = {}
     for base, abs_path in files.iteritems():
-        dst = conf.get(base, "~/.{}".format(base))
+        default_dst = os.path.expanduser("~/.{}")
+        dst = conf.get(base, default_dst.format(base))
         ln_table[abs_path] = dst
     return ln_table
 
@@ -87,5 +92,4 @@ def join(role):
 
 
 if __name__ == "__main__":
-    ENV = get_env()
     join()
