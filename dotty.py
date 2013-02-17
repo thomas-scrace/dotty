@@ -3,13 +3,14 @@ import errno
 import sys
 import shlex
 import glob
+import argparse
 
 
 SYS_RC_PATH = "/etc/dottyrc"
 USER_RC_PATH = os.path.expanduser("~/.dottyrc")
 ROLE_CONF = "role.conf"
 
-OPTIONS = ["srcdir", "remote"]
+OPTIONS = ["srcdir"]
 CONF_PATH = [SYS_RC_PATH, USER_RC_PATH] # Highest priority conf file last.
 
 
@@ -33,16 +34,13 @@ def parse_conf(path):
     return parsed
 
 
-def get_env():
+def get_env(cli_args):
     env = {}
-    confs = [parse_conf(p) for p in CONF_PATH]
+    confs = [parse_conf(p) for p in CONF_PATH] + [cli_args]
     for opt in OPTIONS:
         for c in confs:
             env = dict(env.items() + c.items())
     return env
-
-
-ENV = get_env()
 
 
 def role_dir(role):
@@ -102,4 +100,11 @@ def join(role):
 
 
 if __name__ == "__main__":
-    join()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("role", help="Name of the role to join.")
+    parser.add_argument("-s", "--srcdir",
+                        help="Path to the dotfiles source directory.")
+    args = parser.parse_args()
+    ENV = get_env(dict((k, v) for k, v in
+        filter(lambda (_, _v): _v is not None, vars(args).items())))
+    join(args.role)
