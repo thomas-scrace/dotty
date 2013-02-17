@@ -65,7 +65,7 @@ def inherit(conf):
     else:
         parent = conf["inherit"]
         parent_conf = role_conf(parent)
-        parent_conf = inherit(conf)
+        parent_conf = inherit(parent_conf)
         conf["ancestors"].append(parent)
         return dict(parent_conf.items() + conf.items())
 
