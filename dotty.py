@@ -1,4 +1,5 @@
 import os
+import errno
 import sys
 import shlex
 import glob
@@ -10,6 +11,15 @@ ROLE_CONF = "role.conf"
 
 OPTIONS = ["srcdir", "remote"]
 CONF_PATH = [SYS_RC_PATH, USER_RC_PATH] # Highest priority conf file last.
+
+
+def symlink_f(target, link_name):
+    try:
+        os.symlink(target, link_name)
+    except OSError, e:
+        if e.errno == errno.EEXIST:
+            os.unlink(link_name)
+            os.symlink(target, link_name)
 
 
 def parse_conf(path):
@@ -88,7 +98,7 @@ def join(role):
     files = get_files(conf)
     ln_table = get_ln_table(conf, files)
     for target, link_name in ln_table.iteritems():
-       os.symlink(target, link_name)
+       symlink_f(target, link_name)
 
 
 if __name__ == "__main__":
