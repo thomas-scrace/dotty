@@ -30,6 +30,13 @@ dotty, which will take care of the rest for you.
 Installation
 ------------
 
+Pip (recommended)
+=================
+
+::
+
+    $ pip install dotty
+
 From the development repository
 ===============================
 
