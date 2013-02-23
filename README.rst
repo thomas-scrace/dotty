@@ -6,8 +6,40 @@ By Thomas Scrace <tom@scrace.org>
 
 .. include:: DESCRIPTION.rst
 
+Installation
+============
+
+From the development repository
+-------------------------------
+
+Clone the repo::
+
+    $ git clone https://github.com/thomas-scrace/dotty.git
+    $ cd dotty
+
+Build the distribution and install::
+
+    $ python setup.py build
+    $ python setup.py install
+
+From the pre-build distro
+-------------------------
+
+Download the tarball::
+
+    $ curl http://scrace.org/software/dotty/dotty-0.1.0.tar.gz
+
+Extract it and change into the dotty directory::
+
+    $ tar -xzvf dotty-1.0.1.tar.gz
+    $ cd dotty-1.0.1
+
+Install::
+
+    $ python setup.py install
+
 Usage
------
+=====
 
 Dotty has the concept of "roles", which each describe a specific
 set of software configuration files. Roles can inherit files
@@ -24,14 +56,14 @@ roles that contain only the differing dotfiles. This enables
 code reuse.
 
 Creating a Role
----------------
+===============
 
 Make a subdirectory within your dotfiles directory. The name of
 this directory is the name of the role. Put the dotfiles for
 this role inside the role directory.
 
 Updating a workstation with a role
-----------------------------------
+==================================
 
 Now that you have created a role, you can update a particular
 computer with the role's configuration files. To do this just
@@ -68,7 +100,7 @@ My preference is to keep undotted files in role directories. If
 you do so, dotty will automatically prepend the dot for you.
 
 Specifying non-default link locations
--------------------------------------
+=====================================
 
 Although by default dotty will link to your dotfiles from your
 home directory, you can override this by specifying a different
@@ -85,7 +117,7 @@ Note that because you have explicitly specified the link name no
 dot will be prepended.
 
 Inheriting
-----------
+==========
 
 To inherit from another role, add the following line to the
 child role's role.conf file::
@@ -116,7 +148,7 @@ locations specified in role.conf files will be inherited and can
 be overridden by child roles.
 
 Specifying the location of the dotfiles directory
--------------------------------------------------
+=================================================
 
 By default dotty will look for roles in ~/dotfiles. You can
 specify an different location in three ways, in order of
