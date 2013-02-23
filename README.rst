@@ -48,7 +48,7 @@ From the pre-build distro
 
 Download the tarball::
 
-    $ curl http://scrace.org/software/dotty/dotty-0.1.0.tar.gz
+    $ curl -O http://files.scrace.org/software/dotty-0.1.0.tar.gz
 
 Extract it and change into the dotty directory::
 
