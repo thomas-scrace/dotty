@@ -1,3 +1,5 @@
+.. highlight:: bash
+
 ---------
 dotty 0.1
 ---------
@@ -39,15 +41,15 @@ Updating a workstation with a role
 Now that you have created a role, you can update a particular
 computer with the role's configuration files. To do this just
 type dotty followed by the name of the role. For example, to
-update using a role called "home", just type::
+update using a role called "home", just type:::
 
-    dotty home
+    $ dotty home
 
 By default this will cause every file (both directories and
 regular files) in your home role's directory to be symlinked
 from your home directory.
 
-For example, given the following role::
+For example, given the following role:::
 
     - ~/
       - dotfiles/
@@ -56,12 +58,12 @@ For example, given the following role::
           - gitconfig
           - gitignore
 
-Running
+Running:::
 
-    dotty home
+    $ dotty home
 
 Will result in the following additional files appearing in your
-home directory:
+home directory:::
 
     .vimrc -> dotfiles/home/vimrc
     .gitconfig -> dotfiles/home/gitconfig
@@ -79,7 +81,7 @@ location in role.conf.
 
 For example, if you want to link your gitconfig dotfile not from
 your home directory, but from /etc you can create a role.conf
-file within your role directory and add the following line:
+file within your role directory and add the following line:::
 
     gitconfig /etc/gitconfig
 
@@ -91,11 +93,11 @@ Inheriting
 ----------
 
 To inherit from another role, add the following line to the
-child role's role.conf file:
+child role's role.conf file:::
 
     inherit <name_of_parent_role>
 
-Consider the following dotfiles directory structure:
+Consider the following dotfiles directory structure:::
 
     - ~/
       - dotfiles/
@@ -107,7 +109,7 @@ Consider the following dotfiles directory structure:
           - role.conf
           - gitconfig
 
-If ~/dotfiles/work/role.conf contains:
+If ~/dotfiles/work/role.conf contains:::
 
     inherit home
 
@@ -125,15 +127,11 @@ By default dotty will look for roles in ~/dotfiles. You can
 specify an different location in three ways, in order of
 decreasing priority:
 
-1. By passing a srcdir argument when calling dotty:
+1. By passing a --srcdir (or -c) argument when calling dotty:::
 
     dotty <role_name> --srcdir <path_to_dotfiles>
 
-or:
-
-    dotty <role_name> -s <path_to_dotfiles>
-
-2. By adding a line to ~/.dottyrc:
+2. By adding a line to ~/.dottyrc:::
 
     srcdir <path_to_srcdir>
 
