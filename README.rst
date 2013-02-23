@@ -1,6 +1,6 @@
----------
-dotty 0.1
----------
+-----------
+dotty 0.1.0
+-----------
 
 By Thomas Scrace <tom@scrace.org>
 
@@ -9,10 +9,11 @@ By Thomas Scrace <tom@scrace.org>
 Usage
 -----
 
-Dotty supports inheritance. It has the concept of "roles", which
-each describe a specific set of software configuration files.
-For example, you might have one role for home and one for work.
-Likely there will be a lot of overlap between configurations.
+Dotty has the concept of "roles", which each describe a specific
+set of software configuration files. Roles can inherit files
+from other roles. For example, you might have one role for home
+and one for work. Likely there will be a lot of overlap between
+configurations.
 
 In some cases, for example, it might just be that your
 .gitconfig file needs a different author email address at home
