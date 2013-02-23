@@ -4,11 +4,7 @@ dotty 0.1
 
 By Thomas Scrace <tom@scrace.org>
 
-dotty is a simple utility for managing dotfiles.
-
-If you keep your dotfiles under version control and want to keep
-multiple workstations up to date with the latest changes to your
-configuration files you might find dotty useful.
+.. include:: DESCRIPTION.rst
 
 Usage
 -----
@@ -71,7 +67,7 @@ My preference is to keep undotted files in role directories. If
 you do so, dotty will automatically prepend the dot for you.
 
 Specifying non-default link locations
------------------------------------
+-------------------------------------
 
 Although by default dotty will link to your dotfiles from your
 home directory, you can override this by specifying a different
