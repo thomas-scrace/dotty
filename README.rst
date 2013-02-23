@@ -1,16 +1,37 @@
------------
+===========
 dotty 0.1.0
------------
+===========
 
 By Thomas Scrace <tom@scrace.org>
 
-.. include:: DESCRIPTION.rst
+-----------
+Description
+-----------
 
+dotty is a simple tool to aid with configuration file
+management.
+
+dotty lets you keep all your personal dotfiles for all your
+computers in a single directory (optionally, but
+highly-advantageously, under version control). You can define
+different configurations for your different computers using
+"roles", which are specific sets of dotfiles. Roles support
+inheritance.
+
+Running dotty takes a single required argument; the name of the
+role you want to use. Dotty will them symlink the dotfiles for
+that role to their proper places on your machine.
+
+This means that setting up a new computer just means cloning
+your dotfiles repository to your home directory and running
+dotty, which will take care of the rest for you.
+
+------------
 Installation
-============
+------------
 
 From the development repository
--------------------------------
+===============================
 
 Clone the repo::
 
@@ -23,7 +44,7 @@ Build the distribution and install::
     $ python setup.py install
 
 From the pre-build distro
--------------------------
+=========================
 
 Download the tarball::
 
@@ -38,8 +59,17 @@ Install::
 
     $ python setup.py install
 
+------
+Source
+------
+
+The source code for dotty is available at:
+
+https://github.com/thomas-scrace/dotty
+
+-----
 Usage
-=====
+-----
 
 Dotty has the concept of "roles", which each describe a specific
 set of software configuration files. Roles can inherit files
@@ -55,15 +85,17 @@ a base role where most of your configuration lives, and child
 roles that contain only the differing dotfiles. This enables
 code reuse.
 
+---------------
 Creating a Role
-===============
+---------------
 
 Make a subdirectory within your dotfiles directory. The name of
 this directory is the name of the role. Put the dotfiles for
 this role inside the role directory.
 
+----------------------------------
 Updating a workstation with a role
-==================================
+----------------------------------
 
 Now that you have created a role, you can update a particular
 computer with the role's configuration files. To do this just
@@ -99,8 +131,9 @@ home directory::
 My preference is to keep undotted files in role directories. If
 you do so, dotty will automatically prepend the dot for you.
 
+-------------------------------------
 Specifying non-default link locations
-=====================================
+-------------------------------------
 
 Although by default dotty will link to your dotfiles from your
 home directory, you can override this by specifying a different
@@ -116,8 +149,9 @@ This tells dotty to link the gitconfig file from /etc/gitconfig.
 Note that because you have explicitly specified the link name no
 dot will be prepended.
 
+----------
 Inheriting
-==========
+----------
 
 To inherit from another role, add the following line to the
 child role's role.conf file::
@@ -147,8 +181,9 @@ override files of the same name from higher up the chain. Link
 locations specified in role.conf files will be inherited and can
 be overridden by child roles.
 
+-------------------------------------------------
 Specifying the location of the dotfiles directory
-=================================================
+-------------------------------------------------
 
 By default dotty will look for roles in ~/dotfiles. You can
 specify an different location in three ways, in order of
